@@ -1,0 +1,3 @@
+v
+SECRET_KEY=1b45b32d4b724e67ad0758cec2d2ed34
+DATABASE_URL=mysql+pymysql://microblog:<passwd>@localhost:3306/microblog
