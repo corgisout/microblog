@@ -47,7 +47,7 @@ class User(UserMixin, db.Model):
         """
         current_app.logger.debug("Checking password {}".format(password))
         return check_password_hash(self.password_hash, password)
-   def follow(self, user):
+    def follow(self, user):
         """
         Follows another user
         """
@@ -77,7 +77,7 @@ class User(UserMixin, db.Model):
                 followers.c.follower_id == self.id)
         own = Post.query.filter_by(user_id=self.id)
         return followed.union(own).order_by(Post.timestamp.desc())
-        
+
     @staticmethod
     @login.user_loader
     def load_user(id_):
