@@ -20,7 +20,28 @@ jobs:
           command: |
             . venv/bin/activate
             make test
+
+    deploy_to_docker_hub:
+        docker:
+          - image: circleci/buildpack-deps:stretch
+        steps:
+          - setup_remote_docker
+          - checkout
+          - run:
+              name: Create Docker Image
+              command: |
+                docker build -t $DOCKERHUB_USERNAME/microblog -f docker/Dockerfile.prod .
+          - run:
+              name: Publish Docker Image to Docker Hub
+              command: |
+                echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+                docker push $DOCKERHUB_USERNAME/microblog:latest
 workflows:
   main:
     jobs:
-      - build 
+      - build
+  - deploy_to_docker_hub:
+    filters:
+      branches:
+        only:
+          - master
