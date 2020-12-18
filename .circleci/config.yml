@@ -21,7 +21,7 @@ jobs:
             . venv/bin/activate
             make test
 
-    upload_docker:
+  upload_docker:
         docker:
           - image: circleci/buildpack-deps:stretch
         steps:
