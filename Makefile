@@ -149,11 +149,15 @@ exec-tests: test-unit test-integration
 
 
 # target: test                         - Run tests and display code coverage
+.PHONY: test-non-docker
+test: validate exec-tests
+	${py} -m coverage report  --rcfile=.coveragerc
+	$(MAKE) clean-cov
+
+# target: test                         - Run tests and display code coverage
 .PHONY: test
 test:
 	docker-compose up test
-
-
 
 ## target: test-html                    - Run tests and display detailed code coverage with html
 .PHONY: test-html
