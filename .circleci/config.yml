@@ -19,7 +19,7 @@ jobs:
           name: run tests
           command: |
             . venv/bin/activate
-            test-non-docker
+            make test-non-docker
 
   upload_docker:
         docker:
