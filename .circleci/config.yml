@@ -40,13 +40,13 @@ workflows:
   version: 2
   build-master:
     jobs:
-      - build:
-          filters:
-            branches:
-              only: master
       - upload_docker:
           requires:
             - build
+          filters:
+            branches:
+              only: master
+      - build:
           filters:
             branches:
               only: master
